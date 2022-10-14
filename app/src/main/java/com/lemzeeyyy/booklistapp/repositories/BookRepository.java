@@ -22,7 +22,10 @@ public class BookRepository {
     private BookRepository() {
         bookApiClient = BookApiClient.getInstance();
     }
-    public void searchMovieApi(String query){
+    public LiveData<List<Item>> getItems(){
+        return bookApiClient.getItems();
+    }
+    public void setBookApi(String query){
         mQuery = query;
         BookApiClient.getInstance().searchBookApi(query);
     }

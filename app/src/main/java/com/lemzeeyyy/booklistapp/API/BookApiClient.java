@@ -2,6 +2,7 @@ package com.lemzeeyyy.booklistapp.API;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.lemzeeyyy.booklistapp.model.BookObject;
@@ -36,6 +37,10 @@ public class BookApiClient {
 
     public BookApiClient() {
         bookObject = new MutableLiveData<>();
+    }
+    public LiveData<List<Item>> getItems(){
+        // Log.d("MoviesApi", "getMovies: "+myMovies.getValue().size());
+        return bookObject;
     }
     public void searchBookApi(String query){
         if (retrieveBookRunnable!=null){
