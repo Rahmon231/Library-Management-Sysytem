@@ -29,6 +29,12 @@ public class VolumeInfo implements Parcelable
     @SerializedName("pageCount")
     @Expose
     private Integer pageCount;
+    @SerializedName("publisher")
+    @Expose
+    private String publisher;
+    @SerializedName("publishedDate")
+    @Expose
+    private String publishedDate;
 
 
 
@@ -74,9 +80,16 @@ public class VolumeInfo implements Parcelable
         this.contentVersion = ((String) in.readValue((String.class.getClassLoader())));
 
         this.previewLink = ((String) in.readValue((String.class.getClassLoader())));
+
+        in.readList(this.authors, (String.class.getClassLoader()));
+
         this.infoLink = ((String) in.readValue((String.class.getClassLoader())));
 
         this.averageRating = ((Integer) in.readValue((Integer.class.getClassLoader())));
+
+        this.publisher = ((String) in.readValue((String.class.getClassLoader())));
+
+        this.publishedDate = ((String) in.readValue((String.class.getClassLoader())));
        }
 
     public VolumeInfo() {
@@ -148,6 +161,22 @@ public class VolumeInfo implements Parcelable
     public void setAverageRating(Integer averageRating) {
         this.averageRating = averageRating;
     }
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
 
 
     public void writeToParcel(Parcel dest, int flags) {

@@ -107,4 +107,14 @@ public class Item implements Parcelable
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "kind='" + kind + '\'' +
+                ", id='" + id + '\'' +
+                ", etag='" + etag + '\'' +
+                ", selfLink='" + selfLink + '\'' +
+                ", volumeInfo=" + volumeInfo +
+                '}';
+    }
 }
