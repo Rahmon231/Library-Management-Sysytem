@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.lemzeeyyy.booklistapp.API.BookApi;
 import com.lemzeeyyy.booklistapp.model.BookObject;
 import com.lemzeeyyy.booklistapp.model.Item;
+import com.lemzeeyyy.booklistapp.model.VolumeInfo;
 import com.lemzeeyyy.booklistapp.request.Service;
 import com.lemzeeyyy.booklistapp.response.BookSearchResponse;
 import com.lemzeeyyy.booklistapp.utils.Credentials;
@@ -46,8 +47,14 @@ public class MainActivity extends AppCompatActivity {
         );
         responseCall.enqueue(new Callback<BookSearchResponse>() {
             @Override
-            public void onResponse(Call<BookSearchResponse> call, @NonNull Response<BookSearchResponse> response) {
+            public void onResponse(@NonNull Call<BookSearchResponse> call, @NonNull Response<BookSearchResponse> response) {
+
                 if (response.code() == 200){
+
+                    assert response.body() != null;
+                    BookSearchResponse bookObject = response.body();
+
+
                     for (Item books :
                             response.body().getItems()) {
                         Log.d("CHeckApiData", "onResponse: "+books.getVolumeInfo().getTitle());

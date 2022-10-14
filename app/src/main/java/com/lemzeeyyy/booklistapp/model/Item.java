@@ -33,7 +33,6 @@ public class Item implements Parcelable
 
     public final static Creator<Item> CREATOR = new Creator<Item>() {
 
-
         @SuppressWarnings({
                 "unchecked"
         })
