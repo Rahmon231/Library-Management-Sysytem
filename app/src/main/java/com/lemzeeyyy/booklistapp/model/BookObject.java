@@ -82,12 +82,4 @@ public class BookObject implements Parcelable
         return 0;
     }
 
-    @Override
-    public String toString() {
-        return "BookResponse{" +
-                "kind='" + kind + '\'' +
-                ", totalItems=" + totalItems +
-                ", items=" + items +
-                '}';
-    }
 }
