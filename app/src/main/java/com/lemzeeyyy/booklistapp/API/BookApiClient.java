@@ -56,7 +56,7 @@ public class BookApiClient {
                 //Canceling the retrofit call
                 myHandler.cancel(true);
             }
-        },3000, TimeUnit.MILLISECONDS);
+        },5000, TimeUnit.MILLISECONDS);
     }
 
     private class RetrieveBookRunnable implements Runnable{

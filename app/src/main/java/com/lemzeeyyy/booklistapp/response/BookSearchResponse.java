@@ -2,6 +2,7 @@ package com.lemzeeyyy.booklistapp.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.lemzeeyyy.booklistapp.model.ImageLinks;
 import com.lemzeeyyy.booklistapp.model.Item;
 
 import java.util.List;

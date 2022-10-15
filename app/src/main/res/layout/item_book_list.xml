@@ -30,7 +30,8 @@
             android:padding="3dp"
             android:text="Book Title"
             android:textColor="@color/black"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            />
 
         <TextView
             android:id="@+id/idTVpublisher"

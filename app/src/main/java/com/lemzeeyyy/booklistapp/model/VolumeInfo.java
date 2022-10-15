@@ -52,6 +52,9 @@ public class VolumeInfo implements Parcelable
     @SerializedName("averageRating")
     @Expose
     private Integer averageRating;
+    @SerializedName("imageLinks")
+    @Expose
+    private ImageLinks imageLinks;
 
     public final static Creator<VolumeInfo> CREATOR = new Creator<VolumeInfo>() {
 
@@ -90,6 +93,8 @@ public class VolumeInfo implements Parcelable
         this.publisher = ((String) in.readValue((String.class.getClassLoader())));
 
         this.publishedDate = ((String) in.readValue((String.class.getClassLoader())));
+
+        this.imageLinks = ((ImageLinks) in.readValue((ImageLinks.class.getClassLoader())));
        }
 
     public VolumeInfo() {
@@ -177,11 +182,16 @@ public class VolumeInfo implements Parcelable
         this.publishedDate = publishedDate;
     }
 
+    public ImageLinks getImageLinks() {
+        return imageLinks;
+    }
 
+    public void setImageLinks(ImageLinks imageLinks) {
+        this.imageLinks = imageLinks;
+    }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(title);
-
         dest.writeList(authors);
 
         dest.writeValue(description);
@@ -193,6 +203,8 @@ public class VolumeInfo implements Parcelable
         dest.writeValue(infoLink);
 
         dest.writeValue(averageRating);
+        dest.writeValue(imageLinks);
+
 
     }
 

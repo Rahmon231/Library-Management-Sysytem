@@ -1,15 +1,18 @@
 package com.lemzeeyyy.booklistapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
 import com.lemzeeyyy.booklistapp.model.Item;
@@ -19,9 +22,11 @@ import java.util.List;
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookListViewHolder> {
     private List<Item> itemList;
     BookClickListener onBookClickLister;
+    Context context;
 
-    public BookListAdapter(BookClickListener onBookClickLister) {
+    public BookListAdapter(BookClickListener onBookClickLister, Context context) {
         this.onBookClickLister =  onBookClickLister;
+        this.context = context;
     }
 
     @NonNull
@@ -33,14 +38,35 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
 
     @Override
     public void onBindViewHolder(@NonNull BookListViewHolder holder, int position) {
-        holder.setBookInfo(itemList.get(position));
+
+        if(itemList!=null) {
+            holder.setBookInfo(itemList.get(position));
+        }else {
+            Toast.makeText(context, "API Response is null("+itemList.size()+")", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        if(itemList!=null){
+            return itemList.size();
+        }
+        return 0;
     }
 
+
+    public void setBookList(List<Item> itemList) {
+        this.itemList = itemList;
+        notifyDataSetChanged();
+    }
+    public Item getSelectedMovie(int position){
+        if (itemList != null){
+            if (itemList.size() > 0){
+                return itemList.get(position);
+            }
+        }
+        return  null;
+    }
 
     public class BookListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView bookImage;
@@ -56,13 +82,30 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         }
 
         public void setBookInfo(Item item) {
-            bookImage.setImageResource(R.drawable.ic_launcher_background);
-            bookTitle.setText(item.getVolumeInfo().getTitle());
-            bookPublisher.setText(item.getVolumeInfo().getPublisher());
-            bookDate.setText(item.getVolumeInfo().getPublishedDate());
-            bookPageCount.setText(String.valueOf(item.getVolumeInfo().getPageCount()));
+
+                bookTitle.setText(item.getVolumeInfo().getTitle());
+                bookPublisher.setText(item.getVolumeInfo().getPublisher());
+                bookDate.setText(item.getVolumeInfo().getPublishedDate());
+                bookPageCount.setText(String.valueOf(item.getVolumeInfo().getPageCount()));
+                try {
+                    if(item.getVolumeInfo().getImageLinks().getSmallThumbnail()!=null) {
+                        String pictureUrl = item.getVolumeInfo().getImageLinks().getSmallThumbnail();
+                        StringBuilder stringBuilder = new StringBuilder(pictureUrl);
+                        stringBuilder.insert(4, "s");
+                        String picUrl = stringBuilder.toString();
+
+                        Glide.with(context)
+                                .load(picUrl)
+                                .into(bookImage);
+                    }else {
+                        bookImage.setImageResource(R.drawable.ic_launcher_background);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
         }
+
 
         @Override
         public void onClick(View v) {
