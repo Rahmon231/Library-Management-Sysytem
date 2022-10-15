@@ -17,6 +17,5 @@ public interface BookApi {
     Call<BookSearchResponse> searchBooks(
             @Query("q") String query,
             @Query("key") String key
-
     );
 }
