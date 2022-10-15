@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import com.lemzeeyyy.booklistapp.API.BookApi;
+import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.model.Item;
 import com.lemzeeyyy.booklistapp.request.Service;
 import com.lemzeeyyy.booklistapp.response.BookSearchResponse;
@@ -26,6 +29,9 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private BookViewModel viewModel;
+    private SearchView searchView;
+    private RecyclerView recyclerView;
+    private BookListAdapter bookListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
