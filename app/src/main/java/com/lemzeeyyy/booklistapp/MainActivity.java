@@ -24,25 +24,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btn;
+
     private BookViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btn = findViewById(R.id.button);
 
         viewModel = new ViewModelProvider(this).get(BookViewModel.class);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-           //  getBookSearchResponse();
-                observeChange();
-                searchBookApi("Physics");
-            }
-        });
     }
 
     private void getBookSearchResponse() {
