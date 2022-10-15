@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<Item> items) {
                 for (Item item :
                         items) {
-                    Log.d("CheckItems", "onChanged: "+item.getId());
+                    Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getDescription());
                 }
             }
         });
