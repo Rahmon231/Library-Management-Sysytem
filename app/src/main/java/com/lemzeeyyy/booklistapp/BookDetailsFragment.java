@@ -1,64 +1,81 @@
 package com.lemzeeyyy.booklistapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BookDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.lemzeeyyy.booklistapp.model.Item;
+
+import java.util.List;
+
+
 public class BookDetailsFragment extends Fragment {
+    private Item bookItem;
+    private ImageView bookDetailsImageView;
+    private TextView bookDetailsTextView;
+    private TextView authorDetailsTextView;
+    private TextView publisherTextView;
+    private TextView publisherDateTextView;
+    private TextView numberOfPagesTextView;
+    private TextView descriptionTextView;
+    private View view;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public BookDetailsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BookDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BookDetailsFragment newInstance(String param1, String param2) {
-        BookDetailsFragment fragment = new BookDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_details, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_book_details,container,false);
+        getDataFromIntent();
+        return view;
+    }
+    private void getDataFromIntent(){
+        Bundle bundle = this.getArguments();
+        Item book = bundle.getParcelable("books");
+        if (bundle != null) {
+//            Log.d("CheckBundle", "getDataFromIntent: "+book);
+//            Log.d("CheckBundle", "getDataFromIntent: "+bundle);
+            initializeFragmentViews(view);
+            setFragmentViewItems(book);
+
+        } else {
+            throw new NullPointerException("BookDetail Fragment must receive a bookItem");
+        }
+    }
+    private void initializeFragmentViews(View view){
+        bookDetailsImageView = view.findViewById(R.id.book_image);
+        bookDetailsTextView = view.findViewById(R.id.book_title);
+        authorDetailsTextView = view.findViewById(R.id.author_text_view);
+        publisherTextView = view.findViewById(R.id.publisher_text_view);
+        publisherDateTextView = view.findViewById(R.id.publisherDate_text_view);
+        numberOfPagesTextView = view.findViewById(R.id.pages_text_view);
+        descriptionTextView = view.findViewById(R.id.description);
+    }
+
+    private void setFragmentViewItems(Item bookItem){
+        bookDetailsTextView.setText(bookItem.getVolumeInfo().getTitle());
+        List<String> bookAuthors = bookItem.getVolumeInfo().getAuthors();
+        authorDetailsTextView.setText(String.valueOf(bookAuthors));
+        publisherTextView.setText(bookItem.getVolumeInfo().getPublisher());
+        publisherDateTextView.setText(bookItem.getVolumeInfo().getPublishedDate());
+        descriptionTextView.setText(bookItem.getVolumeInfo().getDescription());
     }
 }

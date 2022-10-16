@@ -3,11 +3,13 @@ package com.lemzeeyyy.booklistapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity  implements BookClickListener {
+public class MainActivity extends AppCompatActivity  {
 
     private BookViewModel viewModel;
     private SearchView searchView;
@@ -41,16 +43,23 @@ public class MainActivity extends AppCompatActivity  implements BookClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initializeViews();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_id, BookListFragment.class, null)
+                    .commit();}
+        /*initializeViews();
         configureRecyclerView();
         setupSearchView();
         viewModel = new ViewModelProvider(this).get(BookViewModel.class);
         observeChange();
-        //getBookSearchResponse();
+        getBookSearchResponse();
+        */
+
 
     }
 
-    private void setupSearchView() {
+  /*  private void setupSearchView() {
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,9 +85,11 @@ public class MainActivity extends AppCompatActivity  implements BookClickListene
                 return false;
             }
         });
-    }
+        }
+   */
 
-    private void configureRecyclerView() {
+
+   /* private void configureRecyclerView() {
         bookListAdapter = new BookListAdapter(this,MainActivity.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL,
@@ -158,8 +169,7 @@ public class MainActivity extends AppCompatActivity  implements BookClickListene
         });
     }
 
-    @Override
-    public void onBookClickListener(int position) {
-        Toast.makeText(this, "Book at position "+position, Toast.LENGTH_SHORT).show();
+    */
+
+
     }
-}
