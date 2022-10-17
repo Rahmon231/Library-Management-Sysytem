@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "314603571592",
+    "project_id": "booklistapp-86700",
+    "storage_bucket": "booklistapp-86700.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314603571592:android:ec72e37f2b5d025640923d",
+        "android_client_info": {
+          "package_name": "com.lemzeeyyy.booklistapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314603571592-20r1s6qhdjh5oltao430lr2h6dr521f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClCbofuM-jwoulu3BO3igpU0sIoCPR5PU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314603571592-20r1s6qhdjh5oltao430lr2h6dr521f4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

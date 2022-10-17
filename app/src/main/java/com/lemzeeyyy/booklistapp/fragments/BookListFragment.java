@@ -1,4 +1,4 @@
-package com.lemzeeyyy.booklistapp;
+package com.lemzeeyyy.booklistapp.fragments;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
 import com.lemzeeyyy.booklistapp.model.Item;
@@ -104,8 +105,8 @@ public class BookListFragment extends Fragment implements BookClickListener {
                         items) {
                     bookListAdapter.setBookList(items);
                     try {
-                        Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getImageLinks().getSmallThumbnail()+".jpg");
-                        Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getTitle());
+//                        Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getImageLinks().getSmallThumbnail()+".jpg");
+//                        Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getTitle());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -123,7 +124,7 @@ public class BookListFragment extends Fragment implements BookClickListener {
         bundle.putParcelable("books",book);
         Log.d("TAGY", "onBookClickListener: "+bookListAdapter.getSelectedBook(position).getVolumeInfo().getTitle());
         bookDetailsFragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().remove(new BookListFragment())
+        requireActivity().getSupportFragmentManager().beginTransaction().remove(new BookListFragment())
                 .replace(R.id.fragment_container_id, bookDetailsFragment)
                 .setReorderingAllowed(true)
                 .addToBackStack(null)

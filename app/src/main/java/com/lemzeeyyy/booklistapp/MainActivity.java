@@ -1,36 +1,14 @@
 package com.lemzeeyyy.booklistapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
-import android.widget.Toast;
-
-import com.lemzeeyyy.booklistapp.API.BookApi;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
-import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
-import com.lemzeeyyy.booklistapp.model.Item;
-import com.lemzeeyyy.booklistapp.request.Service;
-import com.lemzeeyyy.booklistapp.response.BookSearchResponse;
-import com.lemzeeyyy.booklistapp.utils.Credentials;
+import com.lemzeeyyy.booklistapp.fragments.BookListFragment;
 import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -47,7 +25,8 @@ public class MainActivity extends AppCompatActivity  {
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
                     .add(R.id.fragment_container_id, BookListFragment.class, null)
-                    .commit();}
+                    .commit();
+        }
         /*initializeViews();
         configureRecyclerView();
         setupSearchView();

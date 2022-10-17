@@ -1,10 +1,11 @@
-package com.lemzeeyyy.booklistapp;
+package com.lemzeeyyy.booklistapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.model.Item;
 
 import java.util.List;
@@ -33,8 +36,6 @@ public class BookDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +52,6 @@ public class BookDetailsFragment extends Fragment {
         Bundle bundle = this.getArguments();
         Item book = bundle.getParcelable("books");
         if (bundle != null) {
-//            Log.d("CheckBundle", "getDataFromIntent: "+book);
-//            Log.d("CheckBundle", "getDataFromIntent: "+bundle);
             initializeFragmentViews(view);
             setFragmentViewItems(book);
 
@@ -77,5 +76,21 @@ public class BookDetailsFragment extends Fragment {
         publisherTextView.setText(bookItem.getVolumeInfo().getPublisher());
         publisherDateTextView.setText(bookItem.getVolumeInfo().getPublishedDate());
         descriptionTextView.setText(bookItem.getVolumeInfo().getDescription());
+        try {
+            if (bookItem.getVolumeInfo().getImageLinks().getSmallThumbnail() != null) {
+                String pictureUrl = bookItem.getVolumeInfo().getImageLinks().getSmallThumbnail();
+                StringBuilder stringBuilder = new StringBuilder(pictureUrl);
+                stringBuilder.insert(4, "s");
+                String picUrl = stringBuilder.toString();
+                Glide.with(this).
+                        load(picUrl)
+                        .into(bookDetailsImageView);
+            }    else {
+                bookDetailsImageView.setImageResource(R.drawable.ic_launcher_background);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
