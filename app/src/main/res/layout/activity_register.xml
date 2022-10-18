@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/usernameET"
+        android:id="@+id/usernameETRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/passwordET"
+        android:id="@+id/passwordETRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -51,10 +51,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameET" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameETRegister" />
 
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/emailETRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -67,7 +67,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordETRegister" />
 
     <Button
         android:id="@+id/buttonRegister"
