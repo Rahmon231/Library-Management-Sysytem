@@ -53,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailEtLogin.getText().toString().trim();
                 String password = Objects.requireNonNull(passwordETLogin.getText()).toString().trim();
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
-                    emailEtLogin.setError("Email field cannot be empty");
-                    passwordETLogin.setError("Password field cannot be empty");
+                    Toast.makeText(LoginActivity.this, "Field cannot be empty",
+                            Toast.LENGTH_SHORT).show();
                 }else {
                     signinUser(email,password);
                 }
