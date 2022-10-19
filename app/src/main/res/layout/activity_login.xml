@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="122dp"
         android:layout_height="122dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_shape"
         android:text="@string/lemzy"
         android:textAlignment="center"
@@ -29,7 +29,7 @@
         android:id="@+id/lin1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/round_design"
-        android:layout_marginTop="32dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,13 +37,11 @@
             android:text="@string/welcome_back"
             android:textColor="#312651"
             android:textSize="28sp"
-            android:textFontWeight="600"
             android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="22.5dp"
-            android:textFontWeight="600"
             android:text="@string/please_login_to_continue"
             android:textSize="15sp"
             android:textColor="#D0C9D6"
@@ -57,7 +55,7 @@
         android:layout_height="53dp"
         android:ems="10"
         android:hint="@string/email_address"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="34dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintTop_toBottomOf="@id/lin1"
@@ -89,13 +87,12 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintTop_toBottomOf="@id/email_loginET"
-        android:drawableEnd="@drawable/ic_baseline_visibility_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/password_loginET"
-            android:layout_width="0dp"
-            android:layout_height="53dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/password"
             android:autofillHints="password"

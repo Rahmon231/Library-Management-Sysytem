@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,6 +36,17 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user!=null){
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            finish();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -51,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = emailEtLogin.getText().toString().trim();
-                String password = Objects.requireNonNull(passwordETLogin.getText()).toString().trim();
+                String password = passwordETLogin.getText().toString().trim();
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                     Toast.makeText(LoginActivity.this, "Field cannot be empty",
                             Toast.LENGTH_SHORT).show();
@@ -82,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.d("TAGY", "onFailure: "+e.getMessage());
                     }
                 });
     }

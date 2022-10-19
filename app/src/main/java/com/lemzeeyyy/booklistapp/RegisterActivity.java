@@ -50,42 +50,39 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerUser(final String username, String email, String password) {
         auth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            FirebaseUser user = auth.getCurrentUser();
-                            assert user != null;
-                            String userId = user.getUid();
-                            reference = FirebaseDatabase.getInstance()
-                                    .getReference("MyUsers")
-                                    .child(userId);
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        FirebaseUser user = auth.getCurrentUser();
+                       // assert user != null;
+                        String userId = user.getUid();
+                        reference = FirebaseDatabase.getInstance()
+                                .getReference("MyUsers")
+                                .child(userId);
 
-                            HashMap<String, Object> usersInfo = new HashMap<>();
-                            usersInfo.put("id", userId);
-                            usersInfo.put("imageURL", "default");
-                            usersInfo.put("username",username);
+                        HashMap<String, Object> usersInfo = new HashMap<>();
+                        usersInfo.put("id", userId);
+                        usersInfo.put("imageURL", "default");
+                        usersInfo.put("username",username);
 
-                            reference.setValue(usersInfo)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
-                                                finish();
-                                            }
+                        reference.setValue(usersInfo)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                            finish();
                                         }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        }else {
-                            Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }else {
+                        Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
