@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:title="Home"
+            android:id="@+id/homeBtnNavDrawer"
+            android:icon="@drawable/ic_baseline_home_24"/>
+        <item android:title="Favorite Books"
+            android:id="@+id/faveBookBtnNavDrawer"
+            android:icon="@drawable/ic_baseline_location_on_24"/>
+        <item android:title="Find a tutor"
+            android:id="@+id/findTutBtnNavDrawer"
+            android:icon="@drawable/ic_baseline_favorite_border_24"/>
+    </group>
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:title="Login"
+                    android:id="@+id/loginNavDrawer"
+                    android:icon="@drawable/ic_baseline_home_24"/>
+                <item android:title="Picture"
+                    android:id="@+id/profilePicNavDrawer"
+                    android:icon="@drawable/ic_baseline_favorite_border_24"/>
+                <item android:title="Logout"
+                    android:id="@+id/logoutNavDrawer"
+                    android:icon="@drawable/ic_baseline_logout_24"/>
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

@@ -36,7 +36,7 @@
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:queryHint="Looking for a book?" />
+            app:queryHint="Looking for a book?"/>
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -69,12 +69,7 @@ public class BookListFragment extends Fragment implements BookClickListener {
 
     }
     private void setupSearchView() {
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewModel.getItems();
-            }
-        });
+        searchView.setOnSearchClickListener(v -> viewModel.getItems());
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {

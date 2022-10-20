@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homeBtnBottom"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home"/>
+    <item android:id="@+id/courseIdBottom"
+        android:icon="@drawable/course_pic"
+        android:title="Course"/>
+    <item android:id="@+id/exploreBottom"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Explore"/>
+    <item android:id="@+id/contactBottom"
+        android:icon="@drawable/ic_baseline_contact_page_24"
+        android:title="Profile"/>
+
+</menu>
