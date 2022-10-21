@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                         reference.setValue(usersInfo)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()){
-                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(RegisterActivity.this, InformationActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();

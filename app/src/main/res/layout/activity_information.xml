@@ -6,15 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InformationActivity"
-
+    android:id="@+id/drawer_layour_id"
     tools:openDrawer="start">
 
-   <!-- <com.google.android.material.navigation.NavigationView
+    <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:menu="@menu/nav_drawer_menu"
+        android:id="@+id/nav_view_id"
         app:headerLayout="@layout/header_layout"
-        android:layout_gravity="start"/> -->
+        android:background="?android:attr/windowBackground"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/nav_drawer_menu"
+        android:layout_gravity="start"/>
 
 
     <include
