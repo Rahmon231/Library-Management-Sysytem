@@ -1,15 +1,18 @@
 package com.lemzeeyyy.booklistapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,14 +32,43 @@ public class InformationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
+                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(InformationActivity.this,
+                        drawerLayout,
+                        R.string.navigation_drawer_open,
+                        R.string.navigation_drawer_close);
+                drawerLayout.addDrawerListener(toggle);
+                toggle.syncState();
+                  navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+@Override
+public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+        case R.id.homeBtnNavDrawer:
+        Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+         break;
+        case R.id.faveBookBtnNavDrawer:
+        Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+        break;
+        case R.id.findTutBtnNavDrawer:
+        Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+        break;
+        case R.id.loginNavDrawer:
+        Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+        break;
+        case R.id.profilePicNavDrawer:
+        Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+        break;
+        case R.id.logoutNavDrawer:
+        Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+        break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+        }
+        });
+
             }
         });
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return false;
-            }
-        });
+
     }
 
 
