@@ -36,4 +36,6 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_fav_book">Favorite Books</string>
+    <string name="menu_find_tutor">Find a tutor</string>
 </resources>
