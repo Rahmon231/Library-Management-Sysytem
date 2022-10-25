@@ -3,21 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single"
-        android:id="@+id/menu_group_id">
+    <group
+        android:checkableBehavior="single">
         <item android:title="Home"
-            android:id="@+id/homeBtnNavDrawer"
+            android:id="@+id/nav_home"
             android:enabled="true"
             android:icon="@drawable/ic_baseline_home_24"/>
         <item android:title="Favorite Books"
-            android:id="@+id/faveBookBtnNavDrawer"
+            android:id="@+id/nav_fav_book"
             android:icon="@drawable/ic_baseline_location_on_24"/>
         <item android:title="Find a tutor"
-            android:id="@+id/findTutBtnNavDrawer"
+            android:id="@+id/nav_find_tutor"
             android:icon="@drawable/ic_baseline_favorite_border_24"/>
     </group>
-    <item android:title="Profile"
-        android:id="@+id/menu_profile_group">
+    <item android:title="Profile">
         <menu>
             <group android:checkableBehavior="single">
                 <item android:title="Login"
