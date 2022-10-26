@@ -1,6 +1,7 @@
 package com.lemzeeyyy.booklistapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
+import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.fragments.BookListFragment;
 import com.lemzeeyyy.booklistapp.fragments.HomeFragment;
 import com.lemzeeyyy.booklistapp.model.Item;
@@ -40,7 +43,7 @@ import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 import java.util.List;
 import java.util.Objects;
 
-public class InformationActivity extends AppCompatActivity implements BookClickListener {
+public class InformationActivity extends AppCompatActivity implements ItemListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private AppBarConfiguration mAppBarConfiguration;
@@ -52,6 +55,7 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
     private LinearLayout recyclerContainer;
     private ConstraintLayout coursesLayout;
     private NavHostFragment navHostFragment;
+    public static Item bookItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,28 +179,31 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
     }
 
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.homeBtnNavDrawer:
-//                Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
-//                Log.d("TAGMENU", "onOptionsItemSelected: "+item.getTitle());
-//                break;
-//            case R.id.menu_profile_group:
-//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.logoutNavDrawer:
-//                FirebaseAuth.getInstance().signOut();
-//                startActivity(new Intent(InformationActivity.this,LoginActivity.class)
-//                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                return true;
-//                   }
-//        drawerLayout.closeDrawer(GravityCompat.START);
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        NavController navController = navHostFragment.getNavController();
+        switch (item.getItemId()){
+            case R.id.homeBtnNavDrawer:
+                Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                Log.d("TAGMENU", "onOptionsItemSelected: "+item.getTitle());
+                break;
+            case R.id.menu_profile_group:
+                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.logoutNavDrawer:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(InformationActivity.this,LoginActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                return true;
+                   }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
+       // navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_information);
         NavController navController = navHostFragment.getNavController();
 
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -204,13 +211,18 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
     }
 
     @Override
-    public void onBookClickListener(int position) {
+    public void sendItem(Item item) {
+        bookItem = item;
+        Log.d("CheckInfoItem", "onCreate: "+bookItem.getVolumeInfo().getTitle());
+    }
 
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        NavController navController = navHostFragment.getNavController();
-        return NavigationUI.onNavDestinationSelected(item, navController)
-                || super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//       //NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_information);
+//        NavController navController = navHostFragment.getNavController();
+//        return NavigationUI.onNavDestinationSelected(item, navController)
+//                || super.onOptionsItemSelected(item);
+//    }
+
+
 }

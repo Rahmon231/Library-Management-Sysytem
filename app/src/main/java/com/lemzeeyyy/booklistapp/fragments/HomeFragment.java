@@ -1,8 +1,11 @@
 package com.lemzeeyyy.booklistapp.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -23,6 +26,7 @@ import com.lemzeeyyy.booklistapp.MainActivity;
 import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
+import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.model.Item;
 import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 
@@ -36,6 +40,8 @@ public class HomeFragment extends Fragment implements BookClickListener {
     private BookListAdapter bookListAdapter;
     private LinearLayout recyclerContainer;
     private ConstraintLayout coursesLayout;
+    private ItemListener itemListener;
+    Item book;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,23 +128,38 @@ public class HomeFragment extends Fragment implements BookClickListener {
 
     @Override
     public void onBookClickListener(int position) {
+
+        Intent intent = new Intent(getActivity(),MainActivity.class);
         Fragment bookDetailsFragment = new BookDetailsFragment();
         Bundle bundle = new Bundle();
-        Item book = bookListAdapter.getSelectedBook(position);
-        bundle.putParcelable("books",book);
-      //  Log.d("TAGY", "onBookClickListener: "+bookListAdapter.getSelectedBook(position).getVolumeInfo().getTitle());
-        bookDetailsFragment.setArguments(bundle);
-        Item getParcel = bundle.getParcelable("books");
-        Toast.makeText(getContext(), getParcel.getVolumeInfo().getTitle(), Toast.LENGTH_SHORT).show();
+        book = bookListAdapter.getSelectedBook(position);
+        Toast.makeText(getActivity(), book.getVolumeInfo().getTitle(), Toast.LENGTH_SHORT).show();
+        itemListener.sendItem(book);
+        startActivity(intent);
+//        BookDetailsFragment bookDetailsFragment = new BookDetailsFragment();
+//        Bundle bundle = new Bundle();
+//        Item book = bookListAdapter.getSelectedBook(position);
+//        bundle.putParcelable("books",book);
+//        Log.d("TAGY", "onBookClickListener: "+bookListAdapter.getSelectedBook(position).getVolumeInfo().getTitle());
+//        bookDetailsFragment.setArguments(bundle);
+//        requireActivity().getSupportFragmentManager().beginTransaction().remove(new HomeFragment())
+//                .replace(R.id.nav_host_fragment_content_information, bookDetailsFragment)
+//                .setReorderingAllowed(true)
+//                .addToBackStack(null)
+//                .commit();
+    }
 
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .remove(new HomeFragment())
-                .replace(R.id.nav_host_fragment_content_information, bookDetailsFragment)
-                .setReorderingAllowed(true)
-                .addToBackStack(null)
-                .commit();
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+       this.itemListener = (InformationActivity) context;
 
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.itemListener = null;
+    }
 }
