@@ -1,6 +1,5 @@
 package com.lemzeeyyy.booklistapp.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,11 +13,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.lemzeeyyy.booklistapp.InformationActivity;
@@ -33,7 +32,7 @@ import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements BookClickListener {
+public class HomeFragment extends Fragment implements BookClickListener, View.OnClickListener {
     private BookViewModel viewModel;
     private SearchView searchView;
     private RecyclerView recyclerView;
@@ -41,6 +40,8 @@ public class HomeFragment extends Fragment implements BookClickListener {
     private LinearLayout recyclerContainer;
     private ConstraintLayout coursesLayout;
     private ItemListener itemListener;
+    RelativeLayout scienceCourse, artCourse,triviaCourse,financeCourse;
+
     Item book;
 
     @Override
@@ -53,6 +54,10 @@ public class HomeFragment extends Fragment implements BookClickListener {
         setupSearchView();
         viewModel = new ViewModelProvider(this).get(BookViewModel.class);
         observeChange();
+        scienceCourse.setOnClickListener(this);
+        artCourse.setOnClickListener(this);
+        triviaCourse.setOnClickListener(this);
+        financeCourse.setOnClickListener(this);
 
         return view;
     }
@@ -67,8 +72,12 @@ public class HomeFragment extends Fragment implements BookClickListener {
     private void initializeViews(View view) {
         recyclerView = view.findViewById(R.id.recyclerView_home);
         searchView = view.findViewById(R.id.search_view_home);
-        recyclerContainer = view.findViewById(R.id.recyclerView_container);
+        recyclerContainer = view.findViewById(R.id.dept_text);
         coursesLayout = view.findViewById(R.id.courses_id_home);
+        financeCourse = view.findViewById(R.id.finance_rel);
+        scienceCourse = view.findViewById(R.id.science_rel);
+        artCourse = view.findViewById(R.id.art_rel);
+        triviaCourse = view.findViewById(R.id.trivia_rel);
 
     }
     private void setupSearchView() {
@@ -161,5 +170,25 @@ public class HomeFragment extends Fragment implements BookClickListener {
     public void onDetach() {
         super.onDetach();
         this.itemListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.art_rel:
+                Toast.makeText(getActivity(), "Art Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.science_rel:
+                Toast.makeText(getActivity(), "Science Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.trivia_rel:
+                Toast.makeText(getActivity(), "Trivia Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.finance_rel:
+                Toast.makeText(getActivity(), "Finance Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
+        }
     }
 }

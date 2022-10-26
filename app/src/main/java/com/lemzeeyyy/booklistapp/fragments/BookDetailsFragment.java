@@ -61,16 +61,14 @@ public class BookDetailsFragment extends Fragment {
     private void getDataFromIntent(){
 
         Bundle bundle = this.getArguments();
+        assert bundle != null;
         Item book = bundle.getParcelable("books");
 
-        if (bundle != null) {
-            initializeFragmentViews(view);
-            setFragmentViewItems(bookItem);
+        initializeFragmentViews(view);
+        setFragmentViewItems(bookItem);
 
-        } else {
-            throw new NullPointerException("BookDetail Fragment must receive a bookItem");
-        }
     }
+
     private void getData(){
         initializeFragmentViews(view);
         setFragmentViewItems(bookItem);

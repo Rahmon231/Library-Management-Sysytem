@@ -9,13 +9,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -39,9 +40,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="205dp"
-            android:layout_marginBottom="30dp"
-            android:id="@+id/recyclerView_container"
+            android:layout_height="190dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/dept_text"
             android:background="@drawable/round_corner_linear"
             android:orientation="vertical">
 
@@ -82,6 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -94,6 +96,7 @@
                         android:layout_width="140dp"
                         android:layout_height="120dp"
                         android:layout_marginEnd="35dp"
+                        android:id="@+id/science_rel"
                         android:background="#144DDE">
 
                         <ImageView
@@ -108,6 +111,7 @@
                             android:layout_alignParentBottom="true"
                             android:layout_centerHorizontal="true"
                             android:text="Science"
+                            android:layout_marginBottom="5dp"
                             android:textColor="@color/white" />
                     </RelativeLayout>
 
@@ -115,6 +119,7 @@
                     <RelativeLayout
                         android:layout_width="140dp"
                         android:layout_height="120dp"
+                        android:id="@+id/finance_rel"
                         android:background="#144DDE">
 
                         <ImageView
@@ -128,6 +133,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="5dp"
                             android:text="Finance"
                             android:textColor="@color/white" />
                     </RelativeLayout>
@@ -156,6 +162,7 @@
                         android:layout_width="140dp"
                         android:layout_height="120dp"
                         android:layout_marginEnd="35dp"
+                        android:id="@+id/art_rel"
                         android:background="#144DDE">
 
                         <ImageView
@@ -169,7 +176,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:layout_centerHorizontal="true"
-                            android:text="Science"
+                            android:layout_marginBottom="5dp"
+                            android:text="Art"
                             android:textColor="@color/white" />
                     </RelativeLayout>
 
@@ -177,6 +185,7 @@
                     <RelativeLayout
                         android:layout_width="140dp"
                         android:layout_height="120dp"
+                        android:id="@+id/trivia_rel"
                         android:background="#144DDE">
 
                         <ImageView
@@ -190,7 +199,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:layout_centerHorizontal="true"
-                            android:text="Finance"
+                            android:layout_marginBottom="5dp"
+                            android:text="Trivia"
                             android:textColor="@color/white" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -205,7 +215,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="25dp"
         android:background="?android:attr/windowBackground"
         app:labelVisibilityMode="labeled"
