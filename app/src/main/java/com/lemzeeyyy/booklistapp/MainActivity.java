@@ -5,9 +5,12 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
+import com.lemzeeyyy.booklistapp.fragments.BookDetailsFragment;
 import com.lemzeeyyy.booklistapp.fragments.BookListFragment;
+import com.lemzeeyyy.booklistapp.model.Item;
 import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 
 public class MainActivity extends AppCompatActivity  {
@@ -21,10 +24,11 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_id, BookListFragment.class, null)
+                    .add(R.id.fragment_container_id, BookDetailsFragment.class, null)
                     .commit();
         }
         /*initializeViews();

@@ -93,5 +93,6 @@ public class BookDetailsFragment extends Fragment {
         }
 
     }
-    
+
+
 }

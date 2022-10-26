@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +32,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
+import com.lemzeeyyy.booklistapp.fragments.BookListFragment;
+import com.lemzeeyyy.booklistapp.fragments.HomeFragment;
 import com.lemzeeyyy.booklistapp.model.Item;
 import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 
@@ -48,6 +51,7 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
     private BookListAdapter bookListAdapter;
     private LinearLayout recyclerContainer;
     private ConstraintLayout coursesLayout;
+    private NavHostFragment navHostFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +62,12 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        initializeView();
-        configureRecyclerView();
-        setupSearchView();
-        viewModel = new ViewModelProvider(this).get(BookViewModel.class);
-        observeChange();
+
+//        initializeView();
+//        configureRecyclerView();
+//        setupSearchView();
+//        viewModel = new ViewModelProvider(this).get(BookViewModel.class);
+//        observeChange();
 
 
 
@@ -85,17 +90,14 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
                 R.id.nav_home, R.id.nav_fav_book, R.id.nav_find_tutor)
                 .setOpenableLayout(drawerLayout)
                 .build();
-        NavController navController = Navigation.findNavController(InformationActivity.this,
-                R.id.nav_host_fragment_content_information);
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_information);
+        NavController navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
     }
 
-
-
-    private void setupSearchView() {
+    /*private void setupSearchView() {
         searchView.setOnSearchClickListener(v -> {
             recyclerView.setVisibility(View.VISIBLE);
             viewModel.getItems();
@@ -165,7 +167,7 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
                 false));
         recyclerView.setAdapter(bookListAdapter);
     }
-
+*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer_menu,menu);
@@ -173,29 +175,30 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.homeBtnNavDrawer:
-                Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
-                Log.d("TAGMENU", "onOptionsItemSelected: "+item.getTitle());
-                break;
-            case R.id.menu_profile_group:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.logoutNavDrawer:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(InformationActivity.this,LoginActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                return true;
-                   }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.homeBtnNavDrawer:
+//                Toast.makeText(InformationActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+//                Log.d("TAGMENU", "onOptionsItemSelected: "+item.getTitle());
+//                break;
+//            case R.id.menu_profile_group:
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+//                return true;
+//            case R.id.logoutNavDrawer:
+//                FirebaseAuth.getInstance().signOut();
+//                startActivity(new Intent(InformationActivity.this,LoginActivity.class)
+//                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//                return true;
+//                   }
+//        drawerLayout.closeDrawer(GravityCompat.START);
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_information);
+        NavController navController = navHostFragment.getNavController();
+
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
@@ -203,5 +206,11 @@ public class InformationActivity extends AppCompatActivity implements BookClickL
     @Override
     public void onBookClickListener(int position) {
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        NavController navController = navHostFragment.getNavController();
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
     }
 }
