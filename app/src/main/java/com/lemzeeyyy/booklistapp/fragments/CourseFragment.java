@@ -66,11 +66,10 @@ public class CourseFragment extends Fragment {
         scienceCourses = listToArrayList(scienceCoursesList);
         populateRecyclerView(view);
 
-        toolbar.setNavigationOnClickListener(v ->
-                Toast.makeText(getContext(), "Back Pressed", Toast.LENGTH_SHORT).show());
-
-
-
+        toolbar.setNavigationOnClickListener(v -> {
+            Toast.makeText(CourseFragment.this.getContext(), "Back Pressed", Toast.LENGTH_SHORT).show();
+            CourseFragment.this.getActivity().finish();
+        });
         return view;
 
     }
