@@ -20,11 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.lemzeeyyy.booklistapp.CourseActivity;
 import com.lemzeeyyy.booklistapp.InformationActivity;
 import com.lemzeeyyy.booklistapp.MainActivity;
 import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
+import com.lemzeeyyy.booklistapp.click_listeners.CourseListener;
 import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.model.Item;
 import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
@@ -32,7 +34,7 @@ import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements BookClickListener, View.OnClickListener {
+public class HomeFragment extends Fragment implements BookClickListener, View.OnClickListener{
     private BookViewModel viewModel;
     private SearchView searchView;
     private RecyclerView recyclerView;
@@ -40,7 +42,9 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
     private LinearLayout recyclerContainer;
     private ConstraintLayout coursesLayout;
     private ItemListener itemListener;
-    RelativeLayout scienceCourse, artCourse,triviaCourse,financeCourse;
+    private CourseListener courseListener;
+    private RelativeLayout scienceCourse, artCourse,triviaCourse,financeCourse;
+    private String courseName = "";
 
     Item book;
 
@@ -163,6 +167,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
        this.itemListener = (InformationActivity) context;
+       this.courseListener = (InformationActivity) context;
 
     }
 
@@ -170,25 +175,45 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
     public void onDetach() {
         super.onDetach();
         this.itemListener = null;
+        courseListener = null;
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), CourseActivity.class);
         switch (v.getId()){
             case R.id.art_rel:
-                Toast.makeText(getActivity(), "Art Clicked", Toast.LENGTH_SHORT).show();
+                courseName = "art";
+                Toast.makeText(getActivity(), courseName, Toast.LENGTH_SHORT).show();
+                courseListener.sendCourse(courseName);
+                intent.putExtra("course",courseName);
+                startActivity(intent);
                 break;
             case R.id.science_rel:
                 Toast.makeText(getActivity(), "Science Clicked", Toast.LENGTH_SHORT).show();
+                courseName = "science";
+                courseListener.sendCourse(courseName);
+                intent.putExtra("course",courseName);
+                startActivity(intent);
                 break;
             case R.id.trivia_rel:
                 Toast.makeText(getActivity(), "Trivia Clicked", Toast.LENGTH_SHORT).show();
+                courseName = "trivia";
+                courseListener.sendCourse(courseName);
+                intent.putExtra("course",courseName);
+                startActivity(intent);
+
                 break;
             case R.id.finance_rel:
                 Toast.makeText(getActivity(), "Finance Clicked", Toast.LENGTH_SHORT).show();
+                courseName = "finance";
+                courseListener.sendCourse(courseName);
+                intent.putExtra("course",courseName);
+                startActivity(intent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
     }
+
 }

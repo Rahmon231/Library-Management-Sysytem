@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
+import com.lemzeeyyy.booklistapp.click_listeners.CourseListener;
 import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.fragments.BookListFragment;
 import com.lemzeeyyy.booklistapp.fragments.HomeFragment;
@@ -43,7 +44,7 @@ import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 import java.util.List;
 import java.util.Objects;
 
-public class InformationActivity extends AppCompatActivity implements ItemListener {
+public class InformationActivity extends AppCompatActivity implements ItemListener, CourseListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private AppBarConfiguration mAppBarConfiguration;
@@ -56,6 +57,7 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
     private ConstraintLayout coursesLayout;
     private NavHostFragment navHostFragment;
     public static Item bookItem;
+    private String courseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,111 +69,21 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-//        initializeView();
-//        configureRecyclerView();
-//        setupSearchView();
-//        viewModel = new ViewModelProvider(this).get(BookViewModel.class);
-//        observeChange();
-
-
-
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//        menu_icon.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                drawerLayout.openDrawer(GravityCompat.START);
-//                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(InformationActivity.this,
-//                        drawerLayout,
-//                        R.string.navigation_drawer_open,
-//                        R.string.navigation_drawer_close);
-//                drawerLayout.addDrawerListener(toggle);
-//                toggle.syncState();
-//
-//            }
-//        });
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_fav_book, R.id.nav_find_tutor)
                 .setOpenableLayout(drawerLayout)
                 .build();
+
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_information);
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-    }
-
-    /*private void setupSearchView() {
-        searchView.setOnSearchClickListener(v -> {
-            recyclerView.setVisibility(View.VISIBLE);
-            viewModel.getItems();
-        });
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                bookListAdapter.setBookList(null);
-                recyclerContainer.setVisibility(View.VISIBLE);
-                coursesLayout.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.GONE);
-                return false;
-            }
-        });
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                recyclerContainer.setVisibility(View.GONE);
-                coursesLayout.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
-                viewModel.searchBookApi(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-    }
-    public void searchBookApi(String query){
-        viewModel.searchBookApi(query);
+        Intent sendData = new Intent();
+        sendData.putExtra("data",courseName);
 
     }
 
-    private void observeChange(){
-        viewModel.getItems().observe(this, new Observer<List<Item>>() {
-            @Override
-            public void onChanged(List<Item> items) {
-                for (Item item :
-                        items) {
-                    Log.d("Check Item", "onChanged: "+item.getVolumeInfo().getTitle());
-                    bookListAdapter.setBookList(items);
-                    try {
-//                        Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getImageLinks().getSmallThumbnail()+".jpg");
-//                        Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getTitle());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        });
-    }
-
-
-    private void initializeView() {
-        recyclerView = findViewById(R.id.recyclerView_home);
-        searchView = findViewById(R.id.search_view_home);
-        recyclerContainer = findViewById(R.id.recyclerView_container);
-        coursesLayout = findViewById(R.id.courses_id_home);
-    }
-    private void configureRecyclerView() {
-        bookListAdapter = new BookListAdapter(this,InformationActivity.this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL,
-                false));
-        recyclerView.setAdapter(bookListAdapter);
-    }
-*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer_menu,menu);
@@ -213,7 +125,11 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
     @Override
     public void sendItem(Item item) {
         bookItem = item;
-        Log.d("CheckInfoItem", "onCreate: "+bookItem.getVolumeInfo().getTitle());
+    }
+
+    @Override
+    public void sendCourse(String course) {
+        courseName = course;
     }
 
 //    @Override
