@@ -63,7 +63,6 @@ public class BookDetailsFragment extends Fragment {
         Bundle bundle = this.getArguments();
         assert bundle != null;
         Item book = bundle.getParcelable("books");
-
         initializeFragmentViews(view);
         setFragmentViewItems(bookItem);
 

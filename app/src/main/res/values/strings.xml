@@ -38,4 +38,33 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_fav_book">Favorite Books</string>
     <string name="menu_find_tutor">Find a tutor</string>
+    <string-array name="science_courses" >
+        <item >Engineering Mathematics</item>
+        <item >Electronics</item>
+        <item >Thermodynamics</item>
+        <item >Physics</item>
+        <item >Mechanics</item>
+        <item >Pure Chemistry</item>
+        <item >Organic Chemistry</item>
+        <item >Engineering Drawing</item>
+        <item >Biology</item>
+        <item >Fluid Mechanics</item>
+        <item>Computer Architecture</item>
+        <item >Digital System Pro</item>
+        <item >Engineering Statistics</item>
+        <item >Network Analysis</item>
+        <item >Strength of Material</item>
+        <item >Control Engineering</item>
+        <item >Power Electronics</item>
+        <item >Digital Signal Processing</item>
+        <item >Mechanical Maintenance</item>
+        <item >Microprogramming</item>
+        <item >Pure Mathematics</item>
+    </string-array>
+    <string-array name="art_courses">
+        <item>Literature</item>
+        <item>Mass Communication</item>
+        <item>Performing Arts and Culture</item>
+        <item>Archaeology and Tourism</item>
+    </string-array>
 </resources>

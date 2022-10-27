@@ -78,9 +78,9 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        Intent sendData = new Intent();
-        sendData.putExtra("data",courseName);
+//        Log.d("CourseNameInfo", "onCreate: "+courseName);
+//        Bundle sendData = new Bundle();
+//        sendData.putString("data",courseName);
 
     }
 
@@ -130,6 +130,8 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
     @Override
     public void sendCourse(String course) {
         courseName = course;
+        Bundle sendData = new Bundle();
+        sendData.putString("data",courseName);
     }
 
 //    @Override

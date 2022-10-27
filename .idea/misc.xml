@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/app_bar_information.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/content_information.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/course_recycler_item.xml" value="0.2115036231884058" />
         <entry key="app/src/main/res/layout/fragment_book_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_book_list.xml" value="0.10283687943262411" />
         <entry key="app/src/main/res/layout/fragment_course.xml" value="0.2115036231884058" />
