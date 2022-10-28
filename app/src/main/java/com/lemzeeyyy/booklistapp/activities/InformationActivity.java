@@ -1,50 +1,38 @@
-package com.lemzeeyyy.booklistapp;
+package com.lemzeeyyy.booklistapp.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
-import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
-import com.lemzeeyyy.booklistapp.click_listeners.CourseListener;
+import com.lemzeeyyy.booklistapp.click_listeners.CourseCategoryListener;
 import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
-import com.lemzeeyyy.booklistapp.fragments.BookListFragment;
-import com.lemzeeyyy.booklistapp.fragments.HomeFragment;
 import com.lemzeeyyy.booklistapp.model.Item;
 import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 
-import java.util.List;
 import java.util.Objects;
 
-public class InformationActivity extends AppCompatActivity implements ItemListener, CourseListener {
+public class InformationActivity extends AppCompatActivity implements ItemListener, CourseCategoryListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private AppBarConfiguration mAppBarConfiguration;
@@ -104,7 +92,7 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
                 return true;
             case R.id.logoutNavDrawer:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(InformationActivity.this,LoginActivity.class)
+                startActivity(new Intent(InformationActivity.this, LoginActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;
                    }

@@ -1,4 +1,4 @@
-package com.lemzeeyyy.booklistapp;
+package com.lemzeeyyy.booklistapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,20 +6,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.lemzeeyyy.booklistapp.click_listeners.CourseListener;
+import com.lemzeeyyy.booklistapp.R;
+import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.fragments.BookDetailsFragment;
 import com.lemzeeyyy.booklistapp.fragments.CourseFragment;
+import com.lemzeeyyy.booklistapp.model.Item;
 
-public class CourseActivity extends AppCompatActivity {
+public class CourseActivity extends AppCompatActivity  implements ItemListener {
     public static final String COURSE = "courseFromCourseActivity";
     Bundle bundle = new Bundle();
+    Bundle bundle1 = new Bundle();
     String deptName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
         if(savedInstanceState == null){
+
             CourseFragment courseFragment = new CourseFragment();
             Intent intent = getIntent();
             String course = intent.getStringExtra("course");
@@ -67,6 +72,7 @@ public class CourseActivity extends AppCompatActivity {
                 default:
                     intent.putExtra(COURSE,"null");
             }
+
         }
     }
     public String getMyData() {
@@ -74,4 +80,11 @@ public class CourseActivity extends AppCompatActivity {
         return bundle.getString(COURSE);
 
     }
+
+    @Override
+    public void sendItem(Item item) {
+        Log.d("itemSent", "sendItem: "+item.getVolumeInfo().getTitle());
+    }
+
+
 }

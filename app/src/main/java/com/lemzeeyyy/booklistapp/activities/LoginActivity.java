@@ -1,4 +1,4 @@
-package com.lemzeeyyy.booklistapp;
+package com.lemzeeyyy.booklistapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Objects;
+import com.lemzeeyyy.booklistapp.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText emailEtLogin;
@@ -41,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user!=null){
-            startActivity(new Intent(LoginActivity.this,InformationActivity.class));
+            startActivity(new Intent(LoginActivity.this, InformationActivity.class));
             finish();
         }
     }

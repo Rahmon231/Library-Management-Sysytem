@@ -1,24 +1,30 @@
-package com.lemzeeyyy.booklistapp;
+package com.lemzeeyyy.booklistapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lemzeeyyy.booklistapp.R;
+import com.lemzeeyyy.booklistapp.click_listeners.CourseClickListener;
+import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
+
 import java.util.ArrayList;
 
-public class CourseFragmentRecyclerAdapter extends RecyclerView.Adapter<CourseFragmentRecyclerAdapter.CourseViewHolder> {
+public class CourseFragmentRecyclerAdapter
+        extends RecyclerView.Adapter<CourseFragmentRecyclerAdapter.CourseViewHolder> {
     private ArrayList<String> courses;
     private Context context;
+    CourseClickListener courseClickListener;
 
-    public CourseFragmentRecyclerAdapter(ArrayList<String> courses, Context context) {
+    public CourseFragmentRecyclerAdapter(ArrayList<String> courses, Context context,CourseClickListener courseClickListener) {
         this.courses = courses;
         this.context = context;
+        this.courseClickListener = courseClickListener;
     }
 
     @NonNull
@@ -38,18 +44,32 @@ public class CourseFragmentRecyclerAdapter extends RecyclerView.Adapter<CourseFr
         return courses.size();
     }
 
+    public void setCourseList(ArrayList<String> courses) {
+        this.courses = courses;
+        notifyDataSetChanged();
+    }
 
-    public class CourseViewHolder extends RecyclerView.ViewHolder {
+    public String getSelectedCourse(int pos){
+        return courses.get(pos);
+    }
+
+
+
+
+    public class CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private BookViewModel viewModel;
         private TextView courseName;
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
             courseName = itemView.findViewById(R.id.course_name);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, courseName.getText(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            itemView.setOnClickListener(this);
+
         }
+
+        @Override
+        public void onClick(View v) {
+            courseClickListener.onCourseClick(getAdapterPosition());
+        }
+
     }
 }

@@ -20,8 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.lemzeeyyy.booklistapp.LoginActivity;
-import com.lemzeeyyy.booklistapp.MainActivity;
+import com.lemzeeyyy.booklistapp.activities.LoginActivity;
 import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
@@ -45,7 +44,7 @@ public class BookListFragment extends Fragment implements BookClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
+
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_book_list,container,false);
         initializeViews(view);
         configureRecyclerView();

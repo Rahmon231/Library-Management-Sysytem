@@ -1,8 +1,10 @@
-package com.lemzeeyyy.booklistapp;
+package com.lemzeeyyy.booklistapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.lemzeeyyy.booklistapp.R;
 
 public class DashboardActivity extends AppCompatActivity {
 

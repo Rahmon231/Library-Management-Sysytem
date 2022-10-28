@@ -59,6 +59,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         this.itemList = itemList;
         notifyDataSetChanged();
     }
+
+
+
     public Item getSelectedBook(int position){
         if (itemList != null){
             if (itemList.size() > 0){

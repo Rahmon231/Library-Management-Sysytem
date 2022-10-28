@@ -20,13 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.lemzeeyyy.booklistapp.CourseActivity;
-import com.lemzeeyyy.booklistapp.InformationActivity;
-import com.lemzeeyyy.booklistapp.MainActivity;
+import com.lemzeeyyy.booklistapp.activities.CourseActivity;
+import com.lemzeeyyy.booklistapp.activities.InformationActivity;
+import com.lemzeeyyy.booklistapp.activities.MainActivity;
 import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
-import com.lemzeeyyy.booklistapp.click_listeners.CourseListener;
+import com.lemzeeyyy.booklistapp.click_listeners.CourseCategoryListener;
 import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.model.Item;
 import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
     private LinearLayout recyclerContainer;
     private ConstraintLayout coursesLayout;
     private ItemListener itemListener;
-    private CourseListener courseListener;
+    private CourseCategoryListener courseCategoryListener;
     private RelativeLayout scienceCourse, artCourse,triviaCourse,financeCourse;
     private String courseName = "";
 
@@ -167,7 +167,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
        this.itemListener = (InformationActivity) context;
-       this.courseListener = (InformationActivity) context;
+       this.courseCategoryListener = (InformationActivity) context;
 
     }
 
@@ -175,7 +175,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
     public void onDetach() {
         super.onDetach();
         this.itemListener = null;
-        courseListener = null;
+        courseCategoryListener = null;
     }
 
     @Override
@@ -184,30 +184,30 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
         switch (v.getId()){
             case R.id.art_rel:
                 courseName = "art";
-                Toast.makeText(getActivity(), courseName, Toast.LENGTH_SHORT).show();
-                courseListener.sendCourse(courseName);
+                //Toast.makeText(getActivity(), courseName, Toast.LENGTH_SHORT).show();
+                courseCategoryListener.sendCourse(courseName);
                 intent.putExtra("course",courseName);
                 startActivity(intent);
                 break;
             case R.id.science_rel:
-                Toast.makeText(getActivity(), "Science Clicked", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "Science Clicked", Toast.LENGTH_SHORT).show();
                 courseName = "science";
-                courseListener.sendCourse(courseName);
+                courseCategoryListener.sendCourse(courseName);
                 intent.putExtra("course",courseName);
                 startActivity(intent);
                 break;
             case R.id.trivia_rel:
-                Toast.makeText(getActivity(), "Trivia Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Trivia Clicked", Toast.LENGTH_SHORT).show();
                 courseName = "trivia";
-                courseListener.sendCourse(courseName);
+                courseCategoryListener.sendCourse(courseName);
                 intent.putExtra("course",courseName);
                 startActivity(intent);
 
                 break;
             case R.id.finance_rel:
-                Toast.makeText(getActivity(), "Finance Clicked", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "Finance Clicked", Toast.LENGTH_SHORT).show();
                 courseName = "finance";
-                courseListener.sendCourse(courseName);
+                courseCategoryListener.sendCourse(courseName);
                 intent.putExtra("course",courseName);
                 startActivity(intent);
                 break;
