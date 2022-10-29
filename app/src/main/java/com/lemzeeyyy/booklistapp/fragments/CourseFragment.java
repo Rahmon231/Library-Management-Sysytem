@@ -1,6 +1,7 @@
 package com.lemzeeyyy.booklistapp.fragments;
 
 import static com.lemzeeyyy.booklistapp.activities.CourseActivity.COURSE;
+import static com.lemzeeyyy.booklistapp.fragments.HomeFragment.getItemAfterObserved;
 
 import android.content.Context;
 import android.content.Intent;
@@ -59,7 +60,8 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
         setUpToolBar(view);
         setCoursesOfCourseCat();
         populateRecyclerView(view);
-        //observeChange();
+       // observeChange();
+        Log.d("tagre", "onCourseClick: "+courseItem);
 
 
         return view;
@@ -71,20 +73,19 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
 
     }
 
-    private void observeChange(){
-        bookListAdapter = new BookListAdapter(this,getContext());
+    private   void observeChange(){
         viewModel.getItems().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
             @Override
             public void onChanged(List<Item> items) {
-                for (Item item :
-                        items) {
+
+                for (Item item : items) {
                     bookListAdapter.setBookList(items);
                     courseItem = item;
-                    itemListener.sendItem(courseItem);
+                    itemListener.sendItem(item);
 
                     try {
 
-                        Log.d("CheckingBookItem", "onChanged: "+courseItem.getVolumeInfo().getTitle());
+                       // Log.d("CheckingBookItem", "onChanged: "+courseItem.getVolumeInfo().getTitle());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -93,6 +94,7 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
             }
         });
     }
+
 
     private void setCoursesOfCourseCat(){
         CourseActivity courseActivity = (CourseActivity) this.getActivity();
@@ -133,10 +135,12 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
 
     private void populateRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.courses_recycler);
+        bookListAdapter = new BookListAdapter(this,getContext());
         recyclerAdapter = new CourseFragmentRecyclerAdapter(scienceCourses,getContext(),this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
     }
+
 
 
     private void getDataFromIntent(){
@@ -163,6 +167,7 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
         observeChange();
         Toast.makeText(getContext(), selectedBook, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), CourseDetailsHostActivity.class);
+        intent.putExtra("selected_book",selectedBook);
         startActivity(intent);
     }
 

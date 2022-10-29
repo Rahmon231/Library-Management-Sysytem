@@ -17,6 +17,7 @@ public class CourseActivity extends AppCompatActivity  implements ItemListener {
     Bundle bundle = new Bundle();
     Bundle bundle1 = new Bundle();
     String deptName;
+    Item items;
 
 
     @Override
@@ -83,6 +84,7 @@ public class CourseActivity extends AppCompatActivity  implements ItemListener {
 
     @Override
     public void sendItem(Item item) {
+        items = item;
         Log.d("itemSent", "sendItem: "+item.getVolumeInfo().getTitle());
     }
 

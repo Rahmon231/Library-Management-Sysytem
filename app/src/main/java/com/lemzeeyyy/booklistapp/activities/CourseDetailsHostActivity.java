@@ -4,6 +4,7 @@ import static com.lemzeeyyy.booklistapp.activities.InformationActivity.bookItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -21,10 +22,14 @@ public class CourseDetailsHostActivity extends AppCompatActivity implements Item
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details_host);
 
+        Intent intent = getIntent();
+        String selected =intent.getStringExtra("selected_book");
+
         if (savedInstanceState == null) {
             courseDetailsFragment = new CourseDetailsFragment();
-
-
+           Bundle bundle = new Bundle();
+           bundle.putString("selectedcourse",selected);
+           courseDetailsFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
                     .add(R.id.fragment_course_host, CourseDetailsFragment.class, null)
@@ -34,6 +39,6 @@ public class CourseDetailsHostActivity extends AppCompatActivity implements Item
 
     @Override
     public void sendItem(Item item) {
-        Log.d("detailsInfo", "sendItem: "+item.getVolumeInfo().getTitle());
+
     }
 }

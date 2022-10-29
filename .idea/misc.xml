@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/round_shape.xml" value="0.1" />
         <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.14491298527443106" />
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.1478825136612022" />
+        <entry key="app/src/main/res/layout/activity_book_details_host.xml" value="0.1096757852077001" />
         <entry key="app/src/main/res/layout/activity_course.xml" value="0.2115036231884058" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_information.xml" value="0.19610507246376813" />
@@ -23,6 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_book_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_book_list.xml" value="0.10283687943262411" />
         <entry key="app/src/main/res/layout/fragment_course.xml" value="0.2115036231884058" />
+        <entry key="app/src/main/res/layout/fragment_course_details.xml" value="0.2115036231884058" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_fav_book.xml" value="0.2115036231884058" />
         <entry key="app/src/main/res/layout/fragment_find_tutor.xml" value="0.21145833333333333" />

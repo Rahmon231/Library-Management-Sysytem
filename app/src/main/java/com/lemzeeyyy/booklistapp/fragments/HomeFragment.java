@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
     private CourseCategoryListener courseCategoryListener;
     private RelativeLayout scienceCourse, artCourse,triviaCourse,financeCourse;
     private String courseName = "";
+    private static Item it;
 
     Item book;
 
@@ -126,7 +128,9 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
             public void onChanged(List<Item> items) {
                 for (Item item :
                         items) {
+                    it = item;
                     bookListAdapter.setBookList(items);
+
                     try {
 //                        Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getImageLinks().getSmallThumbnail()+".jpg");
 //                        Log.d("CheckItems", "onChanged: "+item.getVolumeInfo().getTitle());
@@ -139,6 +143,10 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
         });
     }
 
+    public static Item getItemAfterObserved(){
+        return it;
+    }
+
     @Override
     public void onBookClickListener(int position) {
 
@@ -146,6 +154,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
         Fragment bookDetailsFragment = new BookDetailsFragment();
         Bundle bundle = new Bundle();
         book = bookListAdapter.getSelectedBook(position);
+        Log.d("TAGop", "onBookClickListener: "+getItemAfterObserved().getVolumeInfo().getTitle());
         Toast.makeText(getActivity(), book.getVolumeInfo().getTitle(), Toast.LENGTH_SHORT).show();
         itemListener.sendItem(book);
         startActivity(intent);
