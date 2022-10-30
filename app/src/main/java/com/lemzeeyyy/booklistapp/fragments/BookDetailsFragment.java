@@ -1,6 +1,6 @@
 package com.lemzeeyyy.booklistapp.fragments;
 
-import static com.lemzeeyyy.booklistapp.activities.InformationActivity.bookItem;
+import static com.lemzeeyyy.booklistapp.activities.InformationActivity.getBookItem;
 
 import android.os.Bundle;
 
@@ -36,7 +36,6 @@ public class BookDetailsFragment extends Fragment {
 
         getData();
 
-
         return view;
     }
 
@@ -47,13 +46,13 @@ public class BookDetailsFragment extends Fragment {
         assert bundle != null;
         Item book = bundle.getParcelable("books");
         initializeFragmentViews(view);
-        setFragmentViewItems(bookItem);
+        setFragmentViewItems(getBookItem());
 
     }
 
     private void getData(){
         initializeFragmentViews(view);
-        setFragmentViewItems(bookItem);
+        setFragmentViewItems(getBookItem());
     }
 
     private void initializeFragmentViews(View view){
@@ -88,8 +87,6 @@ public class BookDetailsFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
 }

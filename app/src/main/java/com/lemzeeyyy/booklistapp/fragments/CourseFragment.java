@@ -1,18 +1,13 @@
 package com.lemzeeyyy.booklistapp.fragments;
 
 import static com.lemzeeyyy.booklistapp.activities.CourseActivity.COURSE;
-import static com.lemzeeyyy.booklistapp.fragments.HomeFragment.getItemAfterObserved;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,32 +18,24 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.lemzeeyyy.booklistapp.activities.CourseActivity;
-import com.lemzeeyyy.booklistapp.activities.CourseDetailsHostActivity;
+import com.lemzeeyyy.booklistapp.activities.CourseListHostActivity;
 import com.lemzeeyyy.booklistapp.adapter.CourseFragmentRecyclerAdapter;
-import com.lemzeeyyy.booklistapp.activities.MainActivity;
 import com.lemzeeyyy.booklistapp.R;
-import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
-import com.lemzeeyyy.booklistapp.click_listeners.BookClickListener;
 import com.lemzeeyyy.booklistapp.click_listeners.CourseClickListener;
-import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.model.Item;
-import com.lemzeeyyy.booklistapp.viewmodel.BookViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CourseFragment extends Fragment implements BookClickListener,CourseClickListener {
+public class CourseFragment extends Fragment implements CourseClickListener {
     private Toolbar toolbar;
     private String[] courseCategory;
-    private List<String> scienceCoursesList;
+    private List<String> courseList;
     private String courseName;
-    private ArrayList<String> scienceCourses;
+    private ArrayList<String> coursesArrayList;
     private CourseFragmentRecyclerAdapter recyclerAdapter;
     private RecyclerView recyclerView;
-    private BookViewModel viewModel;
-    private BookListAdapter bookListAdapter;
-    private ItemListener itemListener;
     private Item courseItem;
 
     @Override
@@ -56,45 +43,12 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
                              Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_course, container, false);
-        viewModel = new ViewModelProvider(this).get(BookViewModel.class);
         setUpToolBar(view);
         setCoursesOfCourseCat();
         populateRecyclerView(view);
-       // observeChange();
-        Log.d("tagre", "onCourseClick: "+courseItem);
-
-
         return view;
 
     }
-
-    public void searchBookApi(String query){
-        viewModel.searchBookApi(query);
-
-    }
-
-    private   void observeChange(){
-        viewModel.getItems().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
-            @Override
-            public void onChanged(List<Item> items) {
-
-                for (Item item : items) {
-                    bookListAdapter.setBookList(items);
-                    courseItem = item;
-                    itemListener.sendItem(item);
-
-                    try {
-
-                       // Log.d("CheckingBookItem", "onChanged: "+courseItem.getVolumeInfo().getTitle());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        });
-    }
-
 
     private void setCoursesOfCourseCat(){
         CourseActivity courseActivity = (CourseActivity) this.getActivity();
@@ -112,8 +66,8 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
             case "finance" :
                 break;
         }
-        scienceCoursesList = Arrays.asList(courseCategory);
-        scienceCourses = listToArrayList(scienceCoursesList);
+        courseList = Arrays.asList(courseCategory);
+        coursesArrayList = listToArrayList(courseList);
 
     }
 
@@ -135,8 +89,7 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
 
     private void populateRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.courses_recycler);
-        bookListAdapter = new BookListAdapter(this,getContext());
-        recyclerAdapter = new CourseFragmentRecyclerAdapter(scienceCourses,getContext(),this);
+        recyclerAdapter = new CourseFragmentRecyclerAdapter(coursesArrayList,getContext(),this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
     }
@@ -163,30 +116,12 @@ public class CourseFragment extends Fragment implements BookClickListener,Course
     @Override
     public void onCourseClick(int pos) {
         String selectedBook = recyclerAdapter.getSelectedCourse(pos);
-        searchBookApi(selectedBook);
-        observeChange();
         Toast.makeText(getContext(), selectedBook, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getContext(), CourseDetailsHostActivity.class);
+        Intent intent = new Intent(getContext(), CourseListHostActivity.class);
         intent.putExtra("selected_book",selectedBook);
         startActivity(intent);
-    }
-
-    @Override
-    public void onBookClickListener(int position) {
 
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        this.itemListener = (CourseActivity) context;
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        this.itemListener = null;
-    }
 
 }

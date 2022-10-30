@@ -36,15 +36,8 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private AppBarConfiguration mAppBarConfiguration;
-    private FirebaseAuth auth;
-    private BookViewModel viewModel;
-    private SearchView searchView;
-    private RecyclerView recyclerView;
-    private BookListAdapter bookListAdapter;
-    private LinearLayout recyclerContainer;
-    private ConstraintLayout coursesLayout;
     private NavHostFragment navHostFragment;
-    public static Item bookItem;
+    private static Item bookItem;
     private String courseName;
 
     @Override
@@ -76,6 +69,10 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_drawer_menu,menu);
         return true;
+    }
+
+    public static Item getBookItem(){
+        return bookItem;
     }
 
 
@@ -121,14 +118,6 @@ public class InformationActivity extends AppCompatActivity implements ItemListen
         Bundle sendData = new Bundle();
         sendData.putString("data",courseName);
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//       //NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_information);
-//        NavController navController = navHostFragment.getNavController();
-//        return NavigationUI.onNavDestinationSelected(item, navController)
-//                || super.onOptionsItemSelected(item);
-//    }
 
 
 }

@@ -1,6 +1,6 @@
 package com.lemzeeyyy.booklistapp.activities;
 
-import static com.lemzeeyyy.booklistapp.activities.InformationActivity.bookItem;
+import static com.lemzeeyyy.booklistapp.activities.InformationActivity.getBookItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -22,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bookDetailsFragment = new BookDetailsFragment();
+
         if (savedInstanceState == null) {
              bookDetailsFragment = new BookDetailsFragment();
             Bundle bundle = new Bundle();
-            bundle.putParcelable("books",bookItem);
+            bundle.putParcelable("books",getBookItem());
             bookDetailsFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)

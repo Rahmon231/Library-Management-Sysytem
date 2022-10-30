@@ -158,17 +158,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
         Toast.makeText(getActivity(), book.getVolumeInfo().getTitle(), Toast.LENGTH_SHORT).show();
         itemListener.sendItem(book);
         startActivity(intent);
-//        BookDetailsFragment bookDetailsFragment = new BookDetailsFragment();
-//        Bundle bundle = new Bundle();
-//        Item book = bookListAdapter.getSelectedBook(position);
-//        bundle.putParcelable("books",book);
-//        Log.d("TAGY", "onBookClickListener: "+bookListAdapter.getSelectedBook(position).getVolumeInfo().getTitle());
-//        bookDetailsFragment.setArguments(bundle);
-//        requireActivity().getSupportFragmentManager().beginTransaction().remove(new HomeFragment())
-//                .replace(R.id.nav_host_fragment_content_information, bookDetailsFragment)
-//                .setReorderingAllowed(true)
-//                .addToBackStack(null)
-//                .commit();
+
     }
 
 
