@@ -1,5 +1,6 @@
 package com.lemzeeyyy.booklistapp.fragments;
 
+
 import static com.lemzeeyyy.booklistapp.activities.InformationActivity.getBookItem;
 
 import android.os.Bundle;

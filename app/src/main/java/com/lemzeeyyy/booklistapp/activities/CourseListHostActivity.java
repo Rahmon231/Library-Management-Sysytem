@@ -1,16 +1,22 @@
 package com.lemzeeyyy.booklistapp.activities;
 
+import static com.lemzeeyyy.booklistapp.activities.InformationActivity.getBookItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.lemzeeyyy.booklistapp.R;
+import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.fragments.CourseListFragment;
+import com.lemzeeyyy.booklistapp.model.Item;
 
-public class CourseListHostActivity extends AppCompatActivity  {
+public class CourseListHostActivity extends AppCompatActivity  implements ItemListener {
     private CourseListFragment courseListFragment;
     private static String selected;
+    private static Item bookItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,7 @@ public class CourseListHostActivity extends AppCompatActivity  {
 
         Intent intent = getIntent();
         selected =intent.getStringExtra("selected_book");
+
 
 
         if (savedInstanceState == null) {
@@ -33,4 +40,14 @@ public class CourseListHostActivity extends AppCompatActivity  {
         }
     }
 
+    public static Item getCourseListItem(){
+        return bookItem;
+    }
+
+
+    @Override
+    public void sendItem(Item item) {
+        bookItem = item;
+
+    }
 }

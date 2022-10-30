@@ -5,6 +5,8 @@ import static com.lemzeeyyy.booklistapp.activities.CourseActivity.COURSE;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -36,30 +38,43 @@ public class CourseFragment extends Fragment implements CourseClickListener {
     private ArrayList<String> coursesArrayList;
     private CourseFragmentRecyclerAdapter recyclerAdapter;
     private RecyclerView recyclerView;
+    private CourseActivity courseActivity;
+    private String co;
+
     private Item courseItem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        courseActivity = (CourseActivity) this.getActivity();
+        courseName = courseActivity.getMyData();
+        courseName = "science";
+        Log.d("Checkco", "onCreateView: "+courseName);
         View view =  inflater.inflate(R.layout.fragment_course, container, false);
-        setUpToolBar(view);
-        setCoursesOfCourseCat();
-        populateRecyclerView(view);
         return view;
 
     }
 
-    private void setCoursesOfCourseCat(){
-        CourseActivity courseActivity = (CourseActivity) this.getActivity();
-        courseName = courseActivity.getMyData();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view,savedInstanceState);
+
+        setCoursesOfCourseCat(view);
+        setUpToolBar(view);
+        populateRecyclerView(view);
+
+    }
+
+    private void setCoursesOfCourseCat(View v){
+//        CourseActivity courseActivity = (CourseActivity) this.getActivity();
+//        courseName = courseActivity.getMyData();
 
         switch (courseName){
             case "science" :
-                courseCategory = getActivity().getResources().getStringArray(R.array.science_courses);
+                courseCategory = v.getResources().getStringArray(R.array.science_courses);
                 break;
             case "art" :
-                courseCategory = getActivity().getResources().getStringArray(R.array.art_courses);
+                courseCategory = v.getResources().getStringArray(R.array.art_courses);
                 break;
             case "trivia" :
                 break;
@@ -72,11 +87,11 @@ public class CourseFragment extends Fragment implements CourseClickListener {
     }
 
     private void setUpToolBar(View view){
-        CourseActivity courseActivity = (CourseActivity) this.getActivity();
-        courseName = courseActivity.getMyData();
-        String co = courseName.toUpperCase();
+//        CourseActivity courseActivity = (CourseActivity) this.getActivity();
+//        courseName = courseActivity.getMyData();
+
         toolbar = view.findViewById(R.id.toolbar_course);
-        toolbar.setTitle(co);
+        toolbar.setTitle(courseName);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -120,8 +135,6 @@ public class CourseFragment extends Fragment implements CourseClickListener {
         Intent intent = new Intent(getContext(), CourseListHostActivity.class);
         intent.putExtra("selected_book",selectedBook);
         startActivity(intent);
-
     }
-
 
 }

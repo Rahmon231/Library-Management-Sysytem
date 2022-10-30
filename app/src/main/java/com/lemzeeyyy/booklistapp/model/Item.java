@@ -1,11 +1,7 @@
 package com.lemzeeyyy.booklistapp.model;
 
 import javax.annotation.Generated;
-
-import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
-import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -36,7 +32,7 @@ public class Item implements Parcelable
         @SuppressWarnings({
                 "unchecked"
         })
-        public Item createFromParcel(Parcel in) {
+        public Item createFromParcel(android.os.Parcel in) {
             return new Item(in);
         }
 
@@ -47,7 +43,7 @@ public class Item implements Parcelable
     }
             ;
 
-    protected Item(Parcel in) {
+    protected Item(android.os.Parcel in) {
         this.kind = ((String) in.readValue((String.class.getClassLoader())));
         this.id = ((String) in.readValue((String.class.getClassLoader())));
         this.etag = ((String) in.readValue((String.class.getClassLoader())));
@@ -62,7 +58,6 @@ public class Item implements Parcelable
     public String getKind() {
         return kind;
     }
-
     public void setKind(String kind) {
         this.kind = kind;
     }
@@ -70,7 +65,6 @@ public class Item implements Parcelable
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -78,14 +72,21 @@ public class Item implements Parcelable
     public String getEtag() {
         return etag;
     }
-
     public void setEtag(String etag) {
         this.etag = etag;
     }
+
+    public String getSelfLink() {
+        return selfLink;
+    }
+
+    public void setSelfLink(String selfLink) {
+        this.selfLink = selfLink;
+    }
+
     public VolumeInfo getVolumeInfo() {
         return volumeInfo;
     }
-
     public void setVolumeInfo(VolumeInfo volumeInfo) {
         this.volumeInfo = volumeInfo;
     }
@@ -93,7 +94,7 @@ public class Item implements Parcelable
 
 
 
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(android.os.Parcel dest, int flags) {
         dest.writeValue(kind);
         dest.writeValue(id);
         dest.writeValue(etag);

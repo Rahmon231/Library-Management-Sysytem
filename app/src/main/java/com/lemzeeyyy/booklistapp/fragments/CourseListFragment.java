@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.lemzeeyyy.booklistapp.R;
+import com.lemzeeyyy.booklistapp.activities.CourseDetailsActivity;
 import com.lemzeeyyy.booklistapp.activities.MainActivity;
 import com.lemzeeyyy.booklistapp.adapter.BookListAdapter;
 import com.lemzeeyyy.booklistapp.adapter.CourseListAdapter;
@@ -30,12 +31,12 @@ import java.util.List;
 
 public class CourseListFragment extends Fragment implements BookClickListener {
     private String courseName;
-    private Item courseItem;
     private Toolbar toolbar;
     private BookViewModel viewModel;
     private CourseListAdapter courseListAdapter;
     private RecyclerView recyclerView;
     private ItemListener itemListener;
+    Item course;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,8 +71,8 @@ public class CourseListFragment extends Fragment implements BookClickListener {
         return courseName;
     }
     private void setUpToolBar(View view){
-        toolbar = view.findViewById(R.id.toolbar_course);
-        toolbar.setTitle(getDataFromIntent());
+        toolbar = view.findViewById(R.id.toolbar_course_list);
+        toolbar.setTitle(courseName);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -96,9 +97,13 @@ public class CourseListFragment extends Fragment implements BookClickListener {
 
     @Override
     public void onBookClickListener(int position) {
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        courseItem = courseListAdapter.getSelectedBook(position);
-        itemListener.sendItem(courseItem);
+        Intent intent = new Intent(getActivity(), CourseDetailsActivity.class);
+        course = courseListAdapter.getSelectedBook(position);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("courseitemmm",course);
+        intent.putExtra("bandle",bundle);
+        Log.d("TAGcop", "onBookClickListener: "+course.getVolumeInfo().getTitle());
+       //itemListener.sendItem(course);
         startActivity(intent);
     }
 }

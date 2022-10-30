@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/activity_book_details_host.xml" value="0.1096757852077001" />
         <entry key="app/src/main/res/layout/activity_course.xml" value="0.2115036231884058" />
         <entry key="app/src/main/res/layout/activity_course_item.xml" value="0.2115036231884058" />
+        <entry key="app/src/main/res/layout/activity_course_list_host.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_information.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_information_drawer.xml" value="0.2115036231884058" />
@@ -39,6 +40,7 @@
         <entry key="app/src/main/res/layout/mobile_navigation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/nav_header_information.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/tool_bar_course_list.xml" value="0.10916919959473151" />
         <entry key="app/src/main/res/layout/toolbar_layout.xml" value="0.2115036231884058" />
         <entry key="app/src/main/res/menu/activity_information_drawer.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/menu/activity_main2_drawer.xml" value="0.22552083333333334" />

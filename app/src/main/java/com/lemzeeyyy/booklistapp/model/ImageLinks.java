@@ -2,10 +2,7 @@ package com.lemzeeyyy.booklistapp.model;
 
 import javax.annotation.Generated;
 
-import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
-import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -25,7 +22,7 @@ public class ImageLinks implements Parcelable
         @SuppressWarnings({
                 "unchecked"
         })
-        public ImageLinks createFromParcel(Parcel in) {
+        public ImageLinks createFromParcel(android.os.Parcel in) {
             return new ImageLinks(in);
         }
 
@@ -36,7 +33,7 @@ public class ImageLinks implements Parcelable
     }
             ;
 
-    protected ImageLinks(Parcel in) {
+    protected ImageLinks(android.os.Parcel in) {
         this.smallThumbnail = ((String) in.readValue((String.class.getClassLoader())));
         this.thumbnail = ((String) in.readValue((String.class.getClassLoader())));
     }
@@ -60,7 +57,7 @@ public class ImageLinks implements Parcelable
         this.thumbnail = thumbnail;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(android.os.Parcel dest, int flags) {
         dest.writeValue(smallThumbnail);
         dest.writeValue(thumbnail);
     }
