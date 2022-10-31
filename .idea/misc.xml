@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.1478825136612022" />
         <entry key="app/src/main/res/layout/activity_book_details_host.xml" value="0.1096757852077001" />
         <entry key="app/src/main/res/layout/activity_course.xml" value="0.2115036231884058" />
+        <entry key="app/src/main/res/layout/activity_course_details.xml" value="0.1096757852077001" />
         <entry key="app/src/main/res/layout/activity_course_item.xml" value="0.2115036231884058" />
         <entry key="app/src/main/res/layout/activity_course_list_host.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.19610507246376813" />
