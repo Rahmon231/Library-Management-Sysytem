@@ -1,13 +1,17 @@
 package com.lemzeeyyy.booklistapp.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,12 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 import com.lemzeeyyy.booklistapp.activities.CourseActivity;
 import com.lemzeeyyy.booklistapp.activities.InformationActivity;
 import com.lemzeeyyy.booklistapp.activities.MainActivity;
@@ -46,6 +54,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
     private CourseCategoryListener courseCategoryListener;
     private RelativeLayout scienceCourse, artCourse,triviaCourse,financeCourse;
     private String courseName = "";
+    private BottomNavigationView bottomNavigationView;
 
     Item book;
 
@@ -54,18 +63,55 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home,container,false);
+
+        viewModel = new ViewModelProvider(this).get(BookViewModel.class);
+        observeChange();
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
         configureRecyclerView();
         setupSearchView();
-        viewModel = new ViewModelProvider(this).get(BookViewModel.class);
-        observeChange();
         scienceCourse.setOnClickListener(this);
         artCourse.setOnClickListener(this);
         triviaCourse.setOnClickListener(this);
         financeCourse.setOnClickListener(this);
 
-        return view;
+
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.homeBtnBottom:
+                        Toast.makeText(getActivity(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.courseIdBottom:
+                        Toast.makeText(getActivity(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        FavBookFragment fragment1 = new FavBookFragment();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_information, fragment1);
+                        fragmentTransaction.addToBackStack("BACK");
+                        fragmentTransaction.commit();
+                        return true;
+                    case R.id.exploreBottom:
+                        Toast.makeText(getActivity(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.contactBottom:
+                        Toast.makeText(getActivity(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return false;
+            }
+        });
+
     }
+
     private void configureRecyclerView() {
         bookListAdapter = new BookListAdapter(this,getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
@@ -83,8 +129,10 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
         scienceCourse = view.findViewById(R.id.science_rel);
         artCourse = view.findViewById(R.id.art_rel);
         triviaCourse = view.findViewById(R.id.trivia_rel);
+        bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
 
     }
+
     private void setupSearchView() {
         searchView.setOnSearchClickListener(v -> {
             recyclerView.setVisibility(View.VISIBLE);
@@ -155,12 +203,22 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
 
     }
 
+    public interface ItemListener {
+        void sendItem(Item item);
+    }
+
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-       this.itemListener = (InformationActivity) context;
-       this.courseCategoryListener = (InformationActivity) context;
+//       this.itemListener = (InformationActivity) context;
+//       this.courseCategoryListener = (InformationActivity) context;
+        if (context instanceof CourseCategoryListener){
+            this.courseCategoryListener = (CourseCategoryListener) context;
+        }else {
+            throw new ClassCastException(context.toString()
+            +"must implement ItemListener");
+        }
 
     }
 
@@ -208,5 +266,7 @@ public class HomeFragment extends Fragment implements BookClickListener, View.On
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
     }
+
+
 
 }

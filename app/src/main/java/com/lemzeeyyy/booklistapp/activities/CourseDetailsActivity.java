@@ -6,6 +6,8 @@ import static com.lemzeeyyy.booklistapp.activities.CourseListHostActivity.getCou
 import static com.lemzeeyyy.booklistapp.activities.InformationActivity.getBookItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import com.lemzeeyyy.booklistapp.R;
 import com.lemzeeyyy.booklistapp.click_listeners.ItemListener;
 import com.lemzeeyyy.booklistapp.fragments.BookDetailsFragment;
 import com.lemzeeyyy.booklistapp.fragments.CourseDetailsFragment;
+import com.lemzeeyyy.booklistapp.fragments.HomeFragment;
 import com.lemzeeyyy.booklistapp.model.Item;
 
 public class CourseDetailsActivity extends AppCompatActivity {
